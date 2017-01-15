@@ -1,0 +1,9 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing how to write asynchronous code
+GET        /            controllers.AsyncController.message
+
+# Workentry Router
+GET        /user        controllers.UserController.getAllUsers
