@@ -9,6 +9,7 @@ scalaVersion := "2.11.8"
 libraryDependencies ++= Seq(
   jdbc,
   ws,
+  filters,
   "org.postgresql"         %  "postgresql"               %  "9.4.1209"  withSources() withJavadoc(),
   "org.jooq"               %  "jooq"                     %  "3.8.6"     withSources() withJavadoc(),
   "org.jooq"               %  "jooq-meta"                %  "3.8.6"     withSources() withJavadoc(),
