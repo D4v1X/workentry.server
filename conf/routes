@@ -3,7 +3,11 @@
 # ~~~~
 
 # An example controller showing how to write asynchronous code
-GET        /            controllers.AsyncController.message
+GET           /                controllers.TestController.message
 
 # Workentry Router
-GET        /user        controllers.UserController.getAllUsers
+GET           /user            controllers.UserController.findAllUsers
+GET           /user/:id        controllers.UserController.findUserById(id: Int)
+POST          /user            controllers.UserController.addUser()
+PUT           /user            controllers.UserController.updateUser()
+DELETE        /user/:id        controllers.UserController.deleteUser(id: Int)

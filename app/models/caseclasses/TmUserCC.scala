@@ -1,8 +1,7 @@
 package models.caseclasses
 
-import java.util
-
 import models.pojos.TmUser
+import play.api.libs.json.{Json, OWrites, Reads}
 
 import scala.collection.mutable.ListBuffer
 
@@ -18,6 +17,9 @@ case class TmUserCC(id: Int,
                     password: String)
 
 object TmUserCC {
+
+  implicit val tmUserWrites: OWrites[TmUserCC] = Json.writes[TmUserCC]
+  implicit val tmUserRead: Reads[TmUserCC] = Json.reads[TmUserCC]
 
   def fromPojoList(tmUserList: Seq[TmUser]): List[TmUserCC] = {
 
