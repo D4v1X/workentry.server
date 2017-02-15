@@ -19,6 +19,10 @@ class UserController @Inject() (userService: UserService) extends Controller {
 
       Ok(Json.toJson(TmUserCC.fromPojoList(tmUserList)))
 
+    }.recover {
+
+      case err => InternalServerError(s"Error retrieving the find All Users: ${err.getMessage}")
+
     }
 
   }
@@ -28,6 +32,10 @@ class UserController @Inject() (userService: UserService) extends Controller {
     userService.findUserById(id).map { tmUser =>
 
       Ok(Json.toJson(TmUserCC.fromPojo(tmUser)))
+
+    }.recover {
+
+      case err => InternalServerError(s"Error retrieving the find user with id: $id -> msg: ${err.getMessage}")
 
     }
 
@@ -41,6 +49,10 @@ class UserController @Inject() (userService: UserService) extends Controller {
 
       Ok("")
 
+    }.recover {
+
+      case err => InternalServerError(s"Error retrieving the add user with $tmUserCC -> msg: ${err.getMessage}")
+
     }
 
   }
@@ -53,6 +65,10 @@ class UserController @Inject() (userService: UserService) extends Controller {
 
       Ok("")
 
+    }.recover {
+
+      case err => InternalServerError(s"Error retrieving the update user with $tmUserCC -> msg: ${err.getMessage}")
+
     }
 
   }
@@ -62,6 +78,10 @@ class UserController @Inject() (userService: UserService) extends Controller {
     userService.deleteUser(id).map { _ =>
 
       Ok("")
+
+    }.recover {
+
+      case err => InternalServerError(s"Error retrieving the delete user with id: $id -> msg ${err.getMessage}")
 
     }
 
