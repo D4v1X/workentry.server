@@ -13,9 +13,9 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class UserController @Inject() (userService: UserService) extends Controller {
 
 
-  def findAllUsers = Action.async {
+  def findAll = Action.async {
 
-    userService.findAllUsers.map { tmUserList =>
+    userService.findAll.map { tmUserList =>
 
       Ok(Json.toJson(TmUserCC.fromPojoList(tmUserList)))
 
@@ -27,9 +27,9 @@ class UserController @Inject() (userService: UserService) extends Controller {
 
   }
 
-  def findUserById(id: Int) = Action.async {
+  def findById(id: Int) = Action.async {
 
-    userService.findUserById(id).map { tmUser =>
+    userService.findById(id).map { tmUser =>
 
       Ok(Json.toJson(TmUserCC.fromPojo(tmUser)))
 
@@ -41,11 +41,11 @@ class UserController @Inject() (userService: UserService) extends Controller {
 
   }
 
-  def addUser() = Action.async(parse.json) { request =>
+  def add() = Action.async(parse.json) { request =>
 
     val tmUserCC = request.body.validate[TmUserCC].get
 
-    userService.addUser(tmUserCC).map { _ =>
+    userService.add(tmUserCC).map { _ =>
 
       Ok("")
 
@@ -57,11 +57,11 @@ class UserController @Inject() (userService: UserService) extends Controller {
 
   }
 
-  def updateUser() = Action.async(parse.json) { request =>
+  def update() = Action.async(parse.json) { request =>
 
     val tmUserCC = request.body.validate[TmUserCC].get
 
-    userService.updateUser(tmUserCC).map { _ =>
+    userService.update(tmUserCC).map { _ =>
 
       Ok("")
 
@@ -73,9 +73,9 @@ class UserController @Inject() (userService: UserService) extends Controller {
 
   }
 
-  def deleteUser(id: Int) = Action.async {
+  def delete(id: Int) = Action.async {
 
-    userService.deleteUser(id).map { _ =>
+    userService.delete(id).map { _ =>
 
       Ok("")
 

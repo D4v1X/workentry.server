@@ -1,89 +1,51 @@
 package services
 
-import javax.inject.Inject
-
+import com.google.inject.ImplementedBy
 import models.caseclasses.TmUserCC
-import models.jooq.Tables._
-import models.pojos._
-import utils.DB
+import models.pojos.TmUser
+import services.impl.UserServiceImpl
 
-import scala.collection.JavaConversions._
 import scala.concurrent.Future
 
 /**
-  * Created by davidsantiago on 15/1/17.
+  * Created by davidsantiago on 16/2/17.
   */
-class UserService @Inject()(db: DB) {
+@ImplementedBy(classOf[UserServiceImpl])
+trait UserService {
+
+  /** A person who uses our application.
+    *
+    * @return List of the TmUsers
+    */
+  def findAll(): Future[Seq[TmUser]]
 
 
-  def findAllUsers: Future[Seq[TmUser]] = {
+  /** Find a user by id.
+    *
+    * @param userId id of the user.
+    * @return a TmUser
+    */
+  def findById(userId: Int): Future[TmUser]
 
-    db.query { db =>
+  /** Create a user with TmUserCC information.
+    *
+    * @param tmUserCC user information.
+    * @return a TmUser
+    */
+  def add(tmUserCC: TmUserCC): Future[Int]
 
-      db.selectFrom(TM_USER)
-        .fetchInto(classOf[TmUser])
-        .toList
+  /** Create a user with TmUserCC information.
+    *
+    * @param tmUserCC user information.
+    * @return a TmUser
+    */
+  def update(tmUserCC: TmUserCC): Future[Int]
 
-    }
-
-  }
-
-
-  def findUserById(id: Int): Future[TmUser] = {
-
-    db.query { db =>
-
-      db.selectFrom(TM_USER)
-        .where(TM_USER.ID.eq(id))
-        .fetchOneInto(classOf[TmUser])
-
-    }
-
-  }
-
-  def addUser(tmUserCC: TmUserCC): Future[Int] = {
-
-    db.query { db =>
-
-      db.insertInto(TM_USER)
-        .set(TM_USER.NAME, tmUserCC.name)
-        .set(TM_USER.EMAIL, tmUserCC.email)
-        .set(TM_USER.NIF, tmUserCC.nif)
-        .set(TM_USER.AFILIATION_NO, tmUserCC.afiliationNo)
-        .set(TM_USER.LOGIN_NAME, tmUserCC.loginName)
-        .set(TM_USER.PASSWORD, tmUserCC.password)
-        .execute()
-
-    }
-
-  }
-
-  def updateUser(tmUserCC: TmUserCC): Future[Int] = {
-    db.query { db =>
-
-      db.update(TM_USER)
-        .set(TM_USER.NAME, tmUserCC.name)
-        .set(TM_USER.EMAIL, tmUserCC.email)
-        .set(TM_USER.NIF, tmUserCC.nif)
-        .set(TM_USER.AFILIATION_NO, tmUserCC.afiliationNo)
-        .set(TM_USER.LOGIN_NAME, tmUserCC.loginName)
-        .set(TM_USER.PASSWORD, tmUserCC.password)
-        .where(TM_USER.ID.equal(tmUserCC.id))
-        .execute()
-
-    }
-  }
-
-  def deleteUser(id: Int): Future[Int] = {
-
-    db.query { db =>
-
-      db.delete(TM_USER)
-        .where(TM_USER.ID.equal(id))
-        .execute();
-
-    }
-
-  }
+  /** Delete a user by user id.
+    *
+    * @param userId user id.
+    * @return a TmUser
+    */
+  def delete(userId: Int): Future[Int]
 
 }

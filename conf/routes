@@ -6,8 +6,8 @@
 GET           /                controllers.TestController.message
 
 # Workentry Router
-GET           /user            controllers.UserController.findAllUsers
-GET           /user/:id        controllers.UserController.findUserById(id: Int)
-POST          /user            controllers.UserController.addUser()
-PUT           /user            controllers.UserController.updateUser()
-DELETE        /user/:id        controllers.UserController.deleteUser(id: Int)
+GET           /users            controllers.UserController.findAll
+GET           /users/:id        controllers.UserController.findById(id: Int)
+POST          /users            controllers.UserController.add()
+PUT           /users            controllers.UserController.update()
+DELETE        /users/:id        controllers.UserController.delete(id: Int)
