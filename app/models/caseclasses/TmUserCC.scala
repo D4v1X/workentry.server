@@ -1,14 +1,15 @@
 package models.caseclasses
 
 import models.pojos.TmUser
-import play.api.libs.json.{Json, OWrites, Reads}
+import models.jooq.tables.records.TmUserRecord
+import play.api.libs.json._
 
 import scala.collection.mutable.ListBuffer
 
 /**
   * Created by davidsantiago on 15/1/17.
   */
-case class TmUserCC(id: Int,
+case class TmUserCC(id: Option[Int],
                     name: String,
                     email: String,
                     nif: String,
@@ -36,7 +37,7 @@ object TmUserCC {
   def fromPojo(tmUser: TmUser): TmUserCC = {
 
     TmUserCC(
-      tmUser.getId,
+      Some(tmUser.getId),
       tmUser.getName,
       tmUser.getEmail,
       tmUser.getNif,
@@ -45,6 +46,11 @@ object TmUserCC {
       tmUser.getPassword
     )
 
+  }
+
+  def fromTmUserRecord(tmUserRecord: TmUserRecord): TmUserCC = {
+
+    tmUserRecord.valuesRow.asInstanceOf[TmUserCC]
   }
 
 }

@@ -87,7 +87,7 @@ class UserServiceImpl @Inject()(db: DB) extends UserService {
         .set(TM_USER.AFILIATION_NO, tmUserCC.afiliationNo)
         .set(TM_USER.LOGIN_NAME, tmUserCC.loginName)
         .set(TM_USER.PASSWORD, tmUserCC.password)
-        .where(TM_USER.ID.equal(tmUserCC.id))
+        .where(TM_USER.ID.equal(tmUserCC.id.get))
         .execute()
 
     }

@@ -3,14 +3,14 @@ package controllers
 import javax.inject.Inject
 
 import models.caseclasses.TmUserCC
-import play.api.libs.json.Json
+import play.api.libs.json.{JsError, JsSuccess, Json}
 import play.api.mvc.{Action, Controller}
 import services.UserService
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
 
-class UserController @Inject() (userService: UserService) extends Controller {
+class UserController @Inject()(userService: UserService) extends Controller {
 
 
   def findAll = Action.async {
@@ -43,7 +43,8 @@ class UserController @Inject() (userService: UserService) extends Controller {
 
   def add() = Action.async(parse.json) { request =>
 
-    val tmUserCC = request.body.validate[TmUserCC].get
+    val tmUserCCValidateResult = request.body.validate[TmUserCC]
+    val tmUserCC = tmUserCCValidateResult.get
 
     userService.add(tmUserCC).map { _ =>
 
