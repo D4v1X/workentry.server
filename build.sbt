@@ -11,9 +11,9 @@ libraryDependencies ++= Seq(
   ws,
   filters,
   "org.postgresql"         %  "postgresql"               %  "9.4.1209"  withSources() withJavadoc(),
-  "org.jooq"               %  "jooq"                     %  "3.8.6"     withSources() withJavadoc(),
-  "org.jooq"               %  "jooq-meta"                %  "3.8.6"     withSources() withJavadoc(),
-  "org.jooq"               %  "jooq-codegen"             %  "3.8.6"     withSources() withJavadoc(),
+  "org.jooq"               %  "jooq"                     %  "3.9.1"     withSources() withJavadoc(),
+  "org.jooq"               %  "jooq-meta"                %  "3.9.1"     withSources() withJavadoc(),
+  "org.jooq"               %  "jooq-codegen"             %  "3.9.1"     withSources() withJavadoc(),
   "org.scalatestplus.play" %% "scalatestplus-play"       %  "1.5.1"     % Test
 )
 
