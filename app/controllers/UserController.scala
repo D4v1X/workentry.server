@@ -3,7 +3,7 @@ package controllers
 import javax.inject.Inject
 
 import models.caseclasses.TmUserCC
-import play.api.libs.json.{JsError, JsSuccess, Json}
+import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 import services.UserService
 
@@ -15,7 +15,7 @@ class UserController @Inject()(userService: UserService) extends Controller {
 
   def findAll = Action.async {
 
-    userService.findAll.map { tmUserList =>
+    userService.findAll().map { tmUserList =>
 
       Ok(Json.toJson(TmUserCC.fromPojoList(tmUserList)))
 
