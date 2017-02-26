@@ -4,6 +4,7 @@ import javax.inject._
 
 import play.api.http.DefaultHttpFilters
 import play.filters.cors.CORSFilter
+import play.filters.gzip.GzipFilter
 
 /**
  * This class configures filters that run on every request. This
@@ -15,4 +16,4 @@ import play.filters.cors.CORSFilter
  * the `application.conf` configuration file.
  */
 @Singleton
-class Filters @Inject() (corsFilter: CORSFilter) extends DefaultHttpFilters(corsFilter)
+class Filters @Inject()(corsFilter: CORSFilter, gzipFilter: GzipFilter) extends DefaultHttpFilters(corsFilter, gzipFilter)
