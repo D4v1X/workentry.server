@@ -18,9 +18,9 @@ class DB @Inject()(db: Database, system: ActorSystem) {
   def query[A](queryFn: DSLContext => A): Future[A] = Future {
     db.withConnection { connection =>
 
-      val dslCtxt = DSL.using(connection, SQLDialect.POSTGRES)
+      val dSLContext = DSL.using(connection, SQLDialect.POSTGRES)
 
-      queryFn apply dslCtxt
+      queryFn apply dSLContext
 
     }
   }
@@ -29,9 +29,9 @@ class DB @Inject()(db: Database, system: ActorSystem) {
   def withTransaction[A](queryFn: DSLContext => A): Future[A] = Future {
     db.withTransaction { connection =>
 
-      val dslCtxt = DSL.using(connection, SQLDialect.POSTGRES)
+      val dSLContext = DSL.using(connection, SQLDialect.POSTGRES)
 
-      queryFn apply dslCtxt
+      queryFn apply dSLContext
 
     }
   }
